@@ -1,0 +1,44 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class menu {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("Seleccione una opción:");
+            System.out.println("1. Generar archivos");
+            System.out.println("2. Borrar archivos");
+            System.out.println("3. Salir");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    try {
+                        GenerateInfoFiles.main(null);
+                    } catch (Exception e) {
+                        System.out.println("Error al generar archivos: " + e.getMessage());
+                    }
+                    break;
+                case 2:
+                    try {
+                        GenerateInfoFiles.deleteAllFilesInDirectory();
+                        System.out.println("Archivos borrados exitosamente.");
+                    } catch (IOException e) {
+                        System.out.println("Error al borrar archivos: " + e.getMessage());
+                    }
+                    break;
+                case 3:
+                    exit = true;
+                    System.out.println("Saliendo del programa...");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Intente de nuevo.");
+            }
+        }
+
+        scanner.close();
+    }
+}
